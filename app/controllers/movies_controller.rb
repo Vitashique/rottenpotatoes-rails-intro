@@ -12,7 +12,6 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
-  end
   
   if (params[:filter] == nil and params[:ratings] == nil and params[:sort] == nil and 
               (session[:filter] != nil or session[:ratings] != nil or session[:sort] != nil))
@@ -54,6 +53,8 @@ class MoviesController < ApplicationController
           @movies = Movie.all
         end
       end
+    end
+  end
 
   def new
     # default: render 'new' template
