@@ -34,6 +34,7 @@ h1.title {
   font-style: normal;
 }
 table#movies {
+  background-color: yellow;
   margin: 10px;
   border-collapse: collapse;
   width: 100%;
