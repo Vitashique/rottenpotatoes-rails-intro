@@ -1,4 +1,8 @@
 class MoviesController < ApplicationController
+#add this in for sorting
+  helper_method :sort_column, :sort_direction
+  
+  
 
   def movie_params
     params.require(:movie).permit(:title, :rating, :description, :release_date)
@@ -10,8 +14,22 @@ class MoviesController < ApplicationController
     # will render app/views/movies/show.<extension> by default
   end
 
+#SORTS TITLE AND RELEASE DATE. also check application_helper in helpers folder
+#CHECK application.html.haml IN VIEWS/LAYOUTS AS WELL
   def index
     @movies = Movie.all
+    @movies=Movie.order(sort_column + " " + sort_direction)
+    
+    @classHilite = {"title"=>"","release_date"=>""}
+  end
+#SORTS TITLE AND RELEASE DATE. also check application_helper in helpers folder
+#CHECK application.html.haml IN VIEWS/LAYOUTS AS WELL
+  def sort_column
+    Movie.column_names.include?(params[:sort]) ? params[:sort] : "title"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   def new
